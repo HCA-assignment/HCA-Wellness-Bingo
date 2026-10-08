@@ -21,35 +21,80 @@
     .page {
       max-width: 1000px;
       margin: 0 auto;
-      padding: 24px 16px 40px;
+      padding: 28px 16px 45px;
     }
 
     h1 {
       text-align: center;
-      margin-bottom: 8px;
-      font-size: 2.2rem;
+      margin: 0 0 6px;
+      font-size: 2.3rem;
     }
 
     .subtitle {
       text-align: center;
-      margin-top: 0;
-      margin-bottom: 24px;
-      color: #53646a;
+      margin: 0 0 26px;
+      color: #607176;
+      font-size: 1.05rem;
     }
+
+    /* HOW TO PLAY */
 
     .instructions {
       background: white;
-      border-radius: 16px;
-      padding: 18px;
-      margin-bottom: 22px;
-      line-height: 1.5;
       border: 1px solid #d8dfdc;
+      border-radius: 18px;
+      padding: 20px;
+      margin-bottom: 22px;
     }
 
     .instructions h2 {
-      margin-top: 0;
-      font-size: 1.2rem;
+      text-align: center;
+      margin: 0 0 16px;
+      font-size: 1.3rem;
     }
+
+    .steps {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 10px;
+    }
+
+    .step {
+      background: #f4f7f5;
+      border-radius: 12px;
+      padding: 13px 10px;
+      text-align: center;
+      line-height: 1.35;
+      min-height: 90px;
+    }
+
+    .step-number {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 29px;
+      height: 29px;
+      margin-bottom: 7px;
+      border-radius: 50%;
+      background: #d9e8e2;
+      font-weight: bold;
+    }
+
+    .step strong {
+      display: block;
+      margin-bottom: 3px;
+    }
+
+    .winning-rule {
+      margin-top: 14px;
+      padding: 11px 14px;
+      border-radius: 10px;
+      text-align: center;
+      background: #eee6f2;
+      font-weight: 700;
+    }
+
+    /* CONTROLS */
 
     .controls {
       display: flex;
@@ -81,6 +126,8 @@
       font-size: 1.15rem;
     }
 
+    /* BINGO CARD */
+
     .bingo-card {
       width: 100%;
       max-width: 850px;
@@ -107,7 +154,7 @@
       border: 2px solid #cbd6d3;
       border-radius: 12px;
       cursor: pointer;
-      font-size: 0.95rem;
+      font-size: 0.92rem;
       font-weight: 600;
       line-height: 1.25;
       user-select: none;
@@ -143,20 +190,68 @@
       margin-bottom: 4px;
     }
 
-    .legend {
-      margin: 24px auto 0;
+    /* BOTTOM WELLNESS BOX */
+
+    .wellness-box {
       max-width: 850px;
-      background: white;
-      padding: 16px;
-      border-radius: 14px;
+      margin: 25px auto 0;
+      border-radius: 18px;
       border: 1px solid #d8dfdc;
-      font-size: 0.95rem;
-      line-height: 1.45;
+      background: white;
+      overflow: hidden;
+    }
+
+    .wellness-heading {
+      text-align: center;
+      padding: 14px;
+      background: #e8f0ed;
+    }
+
+    .wellness-heading h3 {
+      margin: 0 0 4px;
+      font-size: 1.2rem;
+    }
+
+    .wellness-heading p {
+      margin: 0;
+      color: #61716f;
+      font-size: 0.92rem;
+    }
+
+    .wellness-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 0;
+    }
+
+    .wellness-item {
+      padding: 14px;
+      text-align: center;
+      border-top: 1px solid #e4e9e7;
+    }
+
+    .wellness-item + .wellness-item {
+      border-left: 1px solid #e4e9e7;
+    }
+
+    .wellness-item strong {
+      display: block;
+      margin-bottom: 4px;
+    }
+
+    .wellness-item span {
+      font-size: 0.88rem;
+      color: #61716f;
+      line-height: 1.35;
     }
 
     @media (max-width: 700px) {
       h1 {
-        font-size: 1.7rem;
+        font-size: 1.8rem;
+      }
+
+      .steps {
+        grid-template-columns: repeat(2, 1fr);
       }
 
       .bingo-card {
@@ -170,12 +265,20 @@
       .bingo-card td {
         height: 105px;
         padding: 5px;
-        font-size: 0.72rem;
+        font-size: 0.7rem;
       }
 
       select,
       button {
         width: 100%;
+      }
+
+      .wellness-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .wellness-item + .wellness-item {
+        border-left: none;
       }
     }
 
@@ -186,7 +289,7 @@
 
       .instructions,
       .controls,
-      .legend {
+      .wellness-box {
         display: none;
       }
 
@@ -206,29 +309,51 @@
 <div class="page">
 
   <h1>Active Aging Bingo</h1>
-  <p class="subtitle">A little wellness, one square at a time.</p>
+  <p class="subtitle">
+    A quick wellness break while we learn together.
+  </p>
 
   <div class="instructions">
+
     <h2>How to Play</h2>
 
-    Select your assigned card number below.
+    <div class="steps">
 
-    During the presentation, tap or click a square when that activity is called.
+      <div class="step">
+        <div class="step-number">1</div>
+        <strong>Choose Your Card</strong>
+        Select the card number assigned to you.
+      </div>
 
-    Tap it again if you marked it by mistake.
+      <div class="step">
+        <div class="step-number">2</div>
+        <strong>Listen for an Activity</strong>
+        We will call activities throughout the presentation.
+      </div>
 
-    The centre <strong>WELLNESS BREAK</strong> space is free.
+      <div class="step">
+        <div class="step-number">3</div>
+        <strong>Do or Think</strong>
+        Complete the activity, then tap the matching square.
+      </div>
 
-    If you complete a line during the presentation, yell
-    <strong>BINGO!</strong>
+      <div class="step">
+        <div class="step-number">4</div>
+        <strong>Get a Line</strong>
+        Complete one full line across, down, or diagonally.
+      </div>
 
-    Please interrupt us — we want to hear it!
+    </div>
+
+    <div class="winning-rule">
+      Got a full line? Yell BINGO! Please interrupt us — we want to hear it!
+    </div>
+
   </div>
 
   <div class="controls">
 
-    <select id="cardSelect" aria-label="Choose bingo card">
-    </select>
+    <select id="cardSelect" aria-label="Choose bingo card"></select>
 
     <button id="resetButton">Reset Card</button>
 
@@ -256,10 +381,40 @@
 
   </table>
 
-  <div class="legend">
-    <strong>Wellness can look different for everyone.</strong>
-    Activities can be modified, completed seated, simplified, or adapted
-    to match a person's interests, comfort and abilities.
+  <div class="wellness-box">
+
+    <div class="wellness-heading">
+      <h3>Wellness Is Personal</h3>
+      <p>
+        There is more than one way to participate.
+      </p>
+    </div>
+
+    <div class="wellness-grid">
+
+      <div class="wellness-item">
+        <strong>Move Your Way</strong>
+        <span>
+          Keep movements comfortable and complete them from your chair.
+        </span>
+      </div>
+
+      <div class="wellness-item">
+        <strong>Think Your Way</strong>
+        <span>
+          Your answers are yours — there is no need to share them.
+        </span>
+      </div>
+
+      <div class="wellness-item">
+        <strong>Make It Work for You</strong>
+        <span>
+          Modify or skip anything that does not feel right for your body.
+        </span>
+      </div>
+
+    </div>
+
   </div>
 
 </div>
@@ -268,39 +423,33 @@
 
 const activities = [
 
-  // Physical wellness
-  "Do 5 shoulder rolls",
-  "Stretch both arms overhead",
-  "Do 5 seated knee lifts",
-  "Take 5 slow deep breaths",
-  "Stand up and sit down once",
+  // DO
+  "DO: 5 shoulder rolls",
+  "DO: Take 3 slow deep breaths",
+  "DO: 5 ankle circles",
+  "DO: 5 seated heel raises",
+  "DO: 5 seated knee lifts",
+  "DO: Stretch both arms overhead",
+  "DO: Squeeze and relax your hands 5 times",
+  "DO: Sit tall and roll your shoulders back",
+  "DO: Turn your head gently left and right",
+  "DO: Reach both arms forward and back",
+  "DO: Tap your toes 5 times",
+  "DO: Relax your shoulders for 5 seconds",
 
-  // Intellectual wellness
-  "Name 3 fruits",
-  "Solve a simple riddle",
-  "Name something that starts with B",
-  "Count backward from 10",
-  "Name a favourite book, show, or movie",
-
-  // Emotional wellness
-  "Think of something that made you smile today",
-  "Take a 10-second relaxation break",
-  "Name something you enjoy doing",
-  "Think of one thing you are looking forward to",
-  "Listen to a few seconds of a favourite song",
-
-  // Social wellness
-  "Say hello to someone",
-  "Give someone a compliment",
-  "Ask someone how their day is going",
-  "Share a favourite snack or food",
-  "Name an activity you enjoy doing with others",
-
-  // Spiritual / meaningful wellness
-  "Think of something you are grateful for",
-  "Name a place where you feel peaceful",
-  "Think of something that gives your day meaning",
-  "Name something you enjoy about being outdoors"
+  // THINK
+  "THINK: Of 3 fruits",
+  "THINK: Of something that made you smile today",
+  "THINK: Of one thing you are looking forward to",
+  "THINK: Of something you are grateful for",
+  "THINK: Of a place where you feel peaceful",
+  "THINK: Of a favourite food",
+  "THINK: Of something you enjoy doing",
+  "THINK: Of a favourite book, show, or movie",
+  "THINK: Of an activity you enjoy doing with others",
+  "THINK: Of something you enjoy about being outdoors",
+  "THINK: Of one way you like to stay active",
+  "THINK: Of one activity that helps you relax"
 
 ];
 
@@ -315,11 +464,8 @@ function seededRandom(seed) {
   let value = seed;
 
   return function() {
-
     value = Math.sin(value) * 10000;
-
     return value - Math.floor(value);
-
   };
 
 }
@@ -327,7 +473,6 @@ function seededRandom(seed) {
 function shuffleWithSeed(array, seed) {
 
   const result = [...array];
-
   const random = seededRandom(seed);
 
   for (let i = result.length - 1; i > 0; i--) {
@@ -339,7 +484,6 @@ function shuffleWithSeed(array, seed) {
   }
 
   return result;
-
 }
 
 function generateCard(cardId) {
@@ -364,13 +508,9 @@ function loadMarkedSquares(cardId) {
   if (!saved) return [];
 
   try {
-
     return JSON.parse(saved);
-
   } catch {
-
     return [];
-
   }
 
 }
@@ -387,7 +527,6 @@ function saveMarkedSquares(cardId, marked) {
 function renderCard(cardId) {
 
   const activitiesForCard = generateCard(cardId);
-
   const markedSquares = loadMarkedSquares(cardId);
 
   bingoBody.innerHTML = "";
@@ -415,17 +554,14 @@ function renderCard(cardId) {
 
       } else {
 
-        td.textContent =
-          activitiesForCard[activityIndex];
+        td.textContent = activitiesForCard[activityIndex];
 
         td.dataset.squareIndex = squareIndex;
 
         activityIndex++;
 
         if (markedSquares.includes(squareIndex)) {
-
           td.classList.add("marked");
-
         }
 
         td.addEventListener("click", function() {
