@@ -1,324 +1,286 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Active Aging Bingo</title>
+<style>
+* { box-sizing: border-box; }
 
-  <title>Active Aging Bingo</title>
+body {
+  margin: 0;
+  font-family: Arial, Helvetica, sans-serif;
+  background: #f7f3ea;
+  color: #243238;
+}
 
-  <style>
-    * {
-      box-sizing: border-box;
-    }
+.page {
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 28px 16px 45px;
+}
 
-    body {
-      margin: 0;
-      font-family: Arial, Helvetica, sans-serif;
-      background: #f7f3ea;
-      color: #243238;
-    }
+h1 {
+  text-align: center;
+  margin: 0 0 6px;
+  font-size: 2.3rem;
+}
 
-    .page {
-      max-width: 1000px;
-      margin: 0 auto;
-      padding: 28px 16px 45px;
-    }
+.subtitle {
+  text-align: center;
+  margin: 0 0 26px;
+  color: #607176;
+  font-size: 1.05rem;
+}
 
-    h1 {
-      text-align: center;
-      margin: 0 0 6px;
-      font-size: 2.3rem;
-    }
+.instructions {
+  background: white;
+  border: 1px solid #d8dfdc;
+  border-radius: 18px;
+  padding: 20px;
+  margin-bottom: 22px;
+}
 
-    .subtitle {
-      text-align: center;
-      margin: 0 0 26px;
-      color: #607176;
-      font-size: 1.05rem;
-    }
+.instructions h2 {
+  text-align: center;
+  margin: 0 0 16px;
+}
 
-    /* HOW TO PLAY */
+.steps {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 10px;
+}
 
-    .instructions {
-      background: white;
-      border: 1px solid #d8dfdc;
-      border-radius: 18px;
-      padding: 20px;
-      margin-bottom: 22px;
-    }
+.step {
+  background: #f4f7f5;
+  border-radius: 12px;
+  padding: 13px 10px;
+  text-align: center;
+  line-height: 1.35;
+  min-height: 90px;
+}
 
-    .instructions h2 {
-      text-align: center;
-      margin: 0 0 16px;
-      font-size: 1.3rem;
-    }
+.step-number {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 29px;
+  height: 29px;
+  margin-bottom: 7px;
+  border-radius: 50%;
+  background: #d9e8e2;
+  font-weight: bold;
+}
 
-    .steps {
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: 10px;
-    }
+.step strong {
+  display: block;
+  margin-bottom: 3px;
+}
 
-    .step {
-      background: #f4f7f5;
-      border-radius: 12px;
-      padding: 13px 10px;
-      text-align: center;
-      line-height: 1.35;
-      min-height: 90px;
-    }
+.winning-rule {
+  margin-top: 14px;
+  padding: 11px 14px;
+  border-radius: 10px;
+  text-align: center;
+  background: #eee6f2;
+  font-weight: 700;
+}
 
-    .step-number {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      width: 29px;
-      height: 29px;
-      margin-bottom: 7px;
-      border-radius: 50%;
-      background: #d9e8e2;
-      font-weight: bold;
-    }
+.controls {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 20px;
+}
 
-    .step strong {
-      display: block;
-      margin-bottom: 3px;
-    }
+select,
+button {
+  font-size: 1rem;
+  padding: 10px 14px;
+  border-radius: 10px;
+  border: 1px solid #aebbb8;
+  background: white;
+  cursor: pointer;
+}
 
-    .winning-rule {
-      margin-top: 14px;
-      padding: 11px 14px;
-      border-radius: 10px;
-      text-align: center;
-      background: #eee6f2;
-      font-weight: 700;
-    }
+.card-number {
+  text-align: center;
+  font-weight: bold;
+  margin-bottom: 10px;
+  font-size: 1.15rem;
+}
 
-    /* CONTROLS */
+.bingo-card {
+  width: 100%;
+  max-width: 850px;
+  margin: 0 auto;
+  border-collapse: separate;
+  border-spacing: 6px;
+  table-layout: fixed;
+}
 
-    .controls {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 10px;
-      justify-content: center;
-      align-items: center;
-      margin-bottom: 20px;
-    }
+.bingo-card th {
+  font-size: 1.8rem;
+  padding: 10px 4px;
+  border-radius: 10px;
+  background: #dfeceb;
+}
 
-    select,
-    button {
-      font-size: 1rem;
-      padding: 10px 14px;
-      border-radius: 10px;
-      border: 1px solid #aebbb8;
-      background: white;
-      cursor: pointer;
-    }
+.bingo-card td {
+  position: relative;
+  height: 125px;
+  padding: 8px;
+  text-align: center;
+  vertical-align: middle;
+  background: white;
+  border: 2px solid #cbd6d3;
+  border-radius: 12px;
+  cursor: pointer;
+  font-size: 0.92rem;
+  font-weight: 600;
+  line-height: 1.25;
+  user-select: none;
+}
 
-    button:hover {
-      background: #eef3f1;
-    }
+.bingo-card td.marked {
+  background: #cfe5dd;
+  border-color: #6f9f8e;
+}
 
-    .card-number {
-      text-align: center;
-      font-weight: bold;
-      margin-bottom: 10px;
-      font-size: 1.15rem;
-    }
+.bingo-card td.marked::after {
+  content: "✓";
+  position: absolute;
+  top: 5px;
+  right: 8px;
+  font-size: 1.2rem;
+}
 
-    /* BINGO CARD */
+.bingo-card td.free {
+  background: #e9def0;
+  border-color: #b49ac4;
+  cursor: default;
+}
 
-    .bingo-card {
-      width: 100%;
-      max-width: 850px;
-      margin: 0 auto;
-      border-collapse: separate;
-      border-spacing: 6px;
-      table-layout: fixed;
-    }
+.free-heart {
+  display: block;
+  font-size: 1.8rem;
+  margin-bottom: 4px;
+}
 
-    .bingo-card th {
-      font-size: 1.8rem;
-      padding: 10px 4px;
-      border-radius: 10px;
-      background: #dfeceb;
-    }
+.wellness-box {
+  max-width: 850px;
+  margin: 25px auto 0;
+  border-radius: 18px;
+  border: 1px solid #d8dfdc;
+  background: white;
+  overflow: hidden;
+}
 
-    .bingo-card td {
-      position: relative;
-      height: 125px;
-      padding: 8px;
-      text-align: center;
-      vertical-align: middle;
-      background: white;
-      border: 2px solid #cbd6d3;
-      border-radius: 12px;
-      cursor: pointer;
-      font-size: 0.92rem;
-      font-weight: 600;
-      line-height: 1.25;
-      user-select: none;
-      transition: transform 0.1s ease, background 0.15s ease;
-    }
+.wellness-heading {
+  text-align: center;
+  padding: 14px;
+  background: #e8f0ed;
+}
 
-    .bingo-card td:hover {
-      transform: scale(1.02);
-    }
+.wellness-heading h3 {
+  margin: 0 0 4px;
+}
 
-    .bingo-card td.marked {
-      background: #cfe5dd;
-      border-color: #6f9f8e;
-    }
+.wellness-heading p {
+  margin: 0;
+  color: #61716f;
+}
 
-    .bingo-card td.marked::after {
-      content: "✓";
-      position: absolute;
-      top: 5px;
-      right: 8px;
-      font-size: 1.2rem;
-    }
+.wellness-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+}
 
-    .bingo-card td.free {
-      background: #e9def0;
-      border-color: #b49ac4;
-      cursor: default;
-    }
+.wellness-item {
+  padding: 14px;
+  text-align: center;
+  border-top: 1px solid #e4e9e7;
+}
 
-    .free-heart {
-      display: block;
-      font-size: 1.8rem;
-      margin-bottom: 4px;
-    }
+.wellness-item + .wellness-item {
+  border-left: 1px solid #e4e9e7;
+}
 
-    /* BOTTOM WELLNESS BOX */
+.wellness-item strong {
+  display: block;
+  margin-bottom: 4px;
+}
 
-    .wellness-box {
-      max-width: 850px;
-      margin: 25px auto 0;
-      border-radius: 18px;
-      border: 1px solid #d8dfdc;
-      background: white;
-      overflow: hidden;
-    }
+.wellness-item span {
+  font-size: 0.88rem;
+  color: #61716f;
+  line-height: 1.35;
+}
 
-    .wellness-heading {
-      text-align: center;
-      padding: 14px;
-      background: #e8f0ed;
-    }
+@media (max-width: 700px) {
+  .steps {
+    grid-template-columns: repeat(2, 1fr);
+  }
 
-    .wellness-heading h3 {
-      margin: 0 0 4px;
-      font-size: 1.2rem;
-    }
+  .bingo-card {
+    border-spacing: 3px;
+  }
 
-    .wellness-heading p {
-      margin: 0;
-      color: #61716f;
-      font-size: 0.92rem;
-    }
+  .bingo-card th {
+    font-size: 1.3rem;
+  }
 
-    .wellness-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 0;
-    }
+  .bingo-card td {
+    height: 105px;
+    padding: 5px;
+    font-size: 0.7rem;
+  }
 
-    .wellness-item {
-      padding: 14px;
-      text-align: center;
-      border-top: 1px solid #e4e9e7;
-    }
+  select,
+  button {
+    width: 100%;
+  }
 
-    .wellness-item + .wellness-item {
-      border-left: 1px solid #e4e9e7;
-    }
+  .wellness-grid {
+    grid-template-columns: 1fr;
+  }
 
-    .wellness-item strong {
-      display: block;
-      margin-bottom: 4px;
-    }
+  .wellness-item + .wellness-item {
+    border-left: none;
+  }
+}
 
-    .wellness-item span {
-      font-size: 0.88rem;
-      color: #61716f;
-      line-height: 1.35;
-    }
+@media print {
+  body {
+    background: white;
+  }
 
-    @media (max-width: 700px) {
-      h1 {
-        font-size: 1.8rem;
-      }
+  .instructions,
+  .controls,
+  .wellness-box {
+    display: none;
+  }
 
-      .steps {
-        grid-template-columns: repeat(2, 1fr);
-      }
-
-      .bingo-card {
-        border-spacing: 3px;
-      }
-
-      .bingo-card th {
-        font-size: 1.3rem;
-      }
-
-      .bingo-card td {
-        height: 105px;
-        padding: 5px;
-        font-size: 0.7rem;
-      }
-
-      select,
-      button {
-        width: 100%;
-      }
-
-      .wellness-grid {
-        grid-template-columns: 1fr;
-      }
-
-      .wellness-item + .wellness-item {
-        border-left: none;
-      }
-    }
-
-    @media print {
-      body {
-        background: white;
-      }
-
-      .instructions,
-      .controls,
-      .wellness-box {
-        display: none;
-      }
-
-      .page {
-        padding: 0;
-      }
-
-      .bingo-card td {
-        height: 120px;
-      }
-    }
-  </style>
+  .page {
+    padding: 0;
+  }
+}
+</style>
 </head>
 
 <body>
-
 <div class="page">
 
   <h1>Active Aging Bingo</h1>
-  <p class="subtitle">
-    A quick wellness break while we learn together.
-  </p>
+  <p class="subtitle">A quick wellness break while we learn together.</p>
 
   <div class="instructions">
-
     <h2>How to Play</h2>
 
     <div class="steps">
-
       <div class="step">
         <div class="step-number">1</div>
         <strong>Choose Your Card</strong>
@@ -339,34 +301,26 @@
 
       <div class="step">
         <div class="step-number">4</div>
-        <strong>Get a Line</strong>
-        Complete one full line across, down, or diagonally.
+        <strong>Get 3 Lines</strong>
+        Complete any 3 full lines across, down, or diagonally.
       </div>
-
     </div>
 
     <div class="winning-rule">
-      Got a full line? Yell BINGO! Please interrupt us — we want to hear it!
+      Got 3 full lines? Yell BINGO! Please interrupt us — we want to hear it!
     </div>
-
   </div>
 
   <div class="controls">
-
     <select id="cardSelect" aria-label="Choose bingo card"></select>
-
     <button id="resetButton">Reset Card</button>
-
     <button id="randomButton">Choose Another Card</button>
-
     <button id="printButton">Print Card</button>
-
   </div>
 
   <div class="card-number" id="cardNumber"></div>
 
   <table class="bingo-card" aria-label="Active Aging Bingo card">
-
     <thead>
       <tr>
         <th>B</th>
@@ -376,54 +330,36 @@
         <th>O</th>
       </tr>
     </thead>
-
     <tbody id="bingoBody"></tbody>
-
   </table>
 
   <div class="wellness-box">
-
     <div class="wellness-heading">
       <h3>Wellness Is Personal</h3>
-      <p>
-        There is more than one way to participate.
-      </p>
+      <p>There is more than one way to participate.</p>
     </div>
 
     <div class="wellness-grid">
-
       <div class="wellness-item">
         <strong>Move Your Way</strong>
-        <span>
-          Keep movements comfortable and complete them from your chair.
-        </span>
+        <span>Keep movements comfortable and complete them from your chair.</span>
       </div>
 
       <div class="wellness-item">
         <strong>Think Your Way</strong>
-        <span>
-          Your answers are yours — there is no need to share them.
-        </span>
+        <span>Your answers are yours — there is no need to share them.</span>
       </div>
 
       <div class="wellness-item">
         <strong>Make It Work for You</strong>
-        <span>
-          Modify or skip anything that does not feel right for your body.
-        </span>
+        <span>Modify or skip anything that does not feel right for your body.</span>
       </div>
-
     </div>
-
   </div>
-
 </div>
 
 <script>
-
 const activities = [
-
-  // DO
   "DO: 5 shoulder rolls",
   "DO: Take 3 slow deep breaths",
   "DO: 5 ankle circles",
@@ -432,12 +368,11 @@ const activities = [
   "DO: Stretch both arms overhead",
   "DO: Squeeze and relax your hands 5 times",
   "DO: Sit tall and roll your shoulders back",
-  "DO: Turn your head gently left and right",
+  "DO: Roll your shoulders 5 times",
   "DO: Reach both arms forward and back",
   "DO: Tap your toes 5 times",
   "DO: Relax your shoulders for 5 seconds",
 
-  // THINK
   "THINK: Of 3 fruits",
   "THINK: Of something that made you smile today",
   "THINK: Of one thing you are looking forward to",
@@ -448,9 +383,8 @@ const activities = [
   "THINK: Of a favourite book, show, or movie",
   "THINK: Of an activity you enjoy doing with others",
   "THINK: Of something you enjoy about being outdoors",
-  "THINK: Of one way you like to stay active",
+  "DO: March in your chair for 20 seconds",
   "THINK: Of one activity that helps you relax"
-
 ];
 
 const numberOfCards = 22;
@@ -460,49 +394,35 @@ const bingoBody = document.getElementById("bingoBody");
 const cardNumber = document.getElementById("cardNumber");
 
 function seededRandom(seed) {
-
   let value = seed;
 
-  return function() {
+  return function () {
     value = Math.sin(value) * 10000;
     return value - Math.floor(value);
   };
-
 }
 
 function shuffleWithSeed(array, seed) {
-
   const result = [...array];
   const random = seededRandom(seed);
 
   for (let i = result.length - 1; i > 0; i--) {
-
     const j = Math.floor(random() * (i + 1));
-
     [result[i], result[j]] = [result[j], result[i]];
-
   }
 
   return result;
 }
 
 function generateCard(cardId) {
-
-  return shuffleWithSeed(
-    activities,
-    cardId * 92821 + 417
-  );
-
+  return shuffleWithSeed(activities, cardId * 92821 + 417);
 }
 
 function storageKey(cardId) {
-
   return "active-aging-bingo-card-" + cardId;
-
 }
 
 function loadMarkedSquares(cardId) {
-
   const saved = localStorage.getItem(storageKey(cardId));
 
   if (!saved) return [];
@@ -512,60 +432,41 @@ function loadMarkedSquares(cardId) {
   } catch {
     return [];
   }
-
 }
 
 function saveMarkedSquares(cardId, marked) {
-
-  localStorage.setItem(
-    storageKey(cardId),
-    JSON.stringify(marked)
-  );
-
+  localStorage.setItem(storageKey(cardId), JSON.stringify(marked));
 }
 
 function renderCard(cardId) {
-
   const activitiesForCard = generateCard(cardId);
   const markedSquares = loadMarkedSquares(cardId);
 
   bingoBody.innerHTML = "";
-
   cardNumber.textContent = "Card #" + cardId;
 
   let activityIndex = 0;
 
   for (let row = 0; row < 5; row++) {
-
     const tr = document.createElement("tr");
 
     for (let column = 0; column < 5; column++) {
-
       const td = document.createElement("td");
-
       const squareIndex = row * 5 + column;
 
       if (squareIndex === 12) {
-
         td.classList.add("free", "marked");
-
-        td.innerHTML =
-          '<span class="free-heart">♥</span>WELLNESS BREAK';
-
+        td.innerHTML = '<span class="free-heart">♥</span>WELLNESS BREAK';
       } else {
-
         td.textContent = activitiesForCard[activityIndex];
-
         td.dataset.squareIndex = squareIndex;
-
         activityIndex++;
 
         if (markedSquares.includes(squareIndex)) {
           td.classList.add("marked");
         }
 
-        td.addEventListener("click", function() {
-
+        td.addEventListener("click", function () {
           td.classList.toggle("marked");
 
           const currentlyMarked = [];
@@ -573,101 +474,64 @@ function renderCard(cardId) {
           bingoBody
             .querySelectorAll("td.marked:not(.free)")
             .forEach(cell => {
-
-              currentlyMarked.push(
-                Number(cell.dataset.squareIndex)
-              );
-
+              currentlyMarked.push(Number(cell.dataset.squareIndex));
             });
 
-          saveMarkedSquares(
-            cardId,
-            currentlyMarked
-          );
-
+          saveMarkedSquares(cardId, currentlyMarked);
         });
-
       }
 
       tr.appendChild(td);
-
     }
 
     bingoBody.appendChild(tr);
-
   }
-
 }
 
 function populateCardSelector() {
-
   for (let i = 1; i <= numberOfCards; i++) {
-
     const option = document.createElement("option");
-
     option.value = i;
-
     option.textContent = "Card " + i;
-
     cardSelect.appendChild(option);
-
   }
-
 }
 
-cardSelect.addEventListener("change", function() {
-
+cardSelect.addEventListener("change", function () {
   renderCard(Number(cardSelect.value));
-
 });
 
 document
   .getElementById("resetButton")
-  .addEventListener("click", function() {
-
+  .addEventListener("click", function () {
     const cardId = Number(cardSelect.value);
-
     localStorage.removeItem(storageKey(cardId));
-
     renderCard(cardId);
-
   });
 
 document
   .getElementById("randomButton")
-  .addEventListener("click", function() {
-
+  .addEventListener("click", function () {
     const current = Number(cardSelect.value);
-
     let newCard = current;
 
     while (newCard === current) {
-
-      newCard =
-        Math.floor(Math.random() * numberOfCards) + 1;
-
+      newCard = Math.floor(Math.random() * numberOfCards) + 1;
     }
 
     cardSelect.value = newCard;
-
     renderCard(newCard);
-
   });
 
 document
   .getElementById("printButton")
-  .addEventListener("click", function() {
-
+  .addEventListener("click", function () {
     window.print();
-
   });
 
 populateCardSelector();
-
 cardSelect.value = 1;
-
 renderCard(1);
-
 </script>
 
 </body>
