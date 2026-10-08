@@ -4,14 +4,32 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Active Aging Bingo</title>
+
 <style>
-* { box-sizing: border-box; }
+* {
+  box-sizing: border-box;
+}
+
+:root {
+  --ink: #233238;
+  --muted: #66777a;
+  --page: #f8f2e8;
+  --white: #ffffff;
+
+  --peach: #f8d9cf;
+  --aqua: #d8eeee;
+  --lav: #e7dcf2;
+  --butter: #f9edc5;
+  --mint: #dcefd9;
+  --sky: #d8ebf6;
+  --rose: #f6dddd;
+}
 
 body {
   margin: 0;
   font-family: Arial, Helvetica, sans-serif;
-  background: #f7f3ea;
-  color: #243238;
+  background: var(--page);
+  color: var(--ink);
 }
 
 .page {
@@ -23,22 +41,23 @@ body {
 h1 {
   text-align: center;
   margin: 0 0 6px;
-  font-size: 2.3rem;
+  font-size: 2.35rem;
 }
 
 .subtitle {
   text-align: center;
   margin: 0 0 26px;
-  color: #607176;
+  color: var(--muted);
   font-size: 1.05rem;
 }
 
 .instructions {
-  background: white;
-  border: 1px solid #d8dfdc;
-  border-radius: 18px;
+  background: var(--white);
+  border: 1px solid #ddd8ce;
+  border-radius: 20px;
   padding: 20px;
   margin-bottom: 22px;
+  box-shadow: 0 8px 20px rgba(65, 55, 40, 0.06);
 }
 
 .instructions h2 {
@@ -53,12 +72,12 @@ h1 {
 }
 
 .step {
-  background: #f4f7f5;
-  border-radius: 12px;
+  background: #f6f7f4;
+  border-radius: 14px;
   padding: 13px 10px;
   text-align: center;
   line-height: 1.35;
-  min-height: 90px;
+  min-height: 92px;
 }
 
 .step-number {
@@ -69,7 +88,7 @@ h1 {
   height: 29px;
   margin-bottom: 7px;
   border-radius: 50%;
-  background: #d9e8e2;
+  background: #dce9e2;
   font-weight: bold;
 }
 
@@ -80,10 +99,10 @@ h1 {
 
 .winning-rule {
   margin-top: 14px;
-  padding: 11px 14px;
-  border-radius: 10px;
+  padding: 12px 14px;
+  border-radius: 12px;
   text-align: center;
-  background: #eee6f2;
+  background: #efe4f3;
   font-weight: 700;
 }
 
@@ -93,7 +112,7 @@ h1 {
   gap: 10px;
   justify-content: center;
   align-items: center;
-  margin-bottom: 20px;
+  margin-bottom: 18px;
 }
 
 select,
@@ -101,7 +120,7 @@ button {
   font-size: 1rem;
   padding: 10px 14px;
   border-radius: 10px;
-  border: 1px solid #aebbb8;
+  border: 1px solid #b9b6ad;
   background: white;
   cursor: pointer;
 }
@@ -118,65 +137,119 @@ button {
   max-width: 850px;
   margin: 0 auto;
   border-collapse: separate;
-  border-spacing: 6px;
+  border-spacing: 8px;
   table-layout: fixed;
 }
 
 .bingo-card th {
   font-size: 1.8rem;
-  padding: 10px 4px;
-  border-radius: 10px;
+  padding: 9px 4px;
+  border-radius: 12px;
   background: #dfeceb;
 }
 
 .bingo-card td {
   position: relative;
-  height: 125px;
-  padding: 8px;
+  height: 135px;
+  padding: 9px 7px;
   text-align: center;
   vertical-align: middle;
-  background: white;
-  border: 2px solid #cbd6d3;
-  border-radius: 12px;
+  border: 2px solid rgba(80, 70, 60, 0.16);
+  border-radius: 18px;
   cursor: pointer;
-  font-size: 0.92rem;
-  font-weight: 600;
-  line-height: 1.25;
   user-select: none;
+  box-shadow: 0 5px 12px rgba(74, 59, 38, 0.06);
+  transition: transform 0.08s ease, box-shadow 0.08s ease, filter 0.08s ease;
+}
+
+.bingo-card td:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 7px 16px rgba(74, 59, 38, 0.10);
+}
+
+.tile-peach {
+  background: var(--peach);
+}
+
+.tile-aqua {
+  background: var(--aqua);
+}
+
+.tile-lav {
+  background: var(--lav);
+}
+
+.tile-butter {
+  background: var(--butter);
+}
+
+.tile-mint {
+  background: var(--mint);
+}
+
+.tile-sky {
+  background: var(--sky);
+}
+
+.tile-rose {
+  background: var(--rose);
+}
+
+.tile-icon {
+  display: block;
+  font-size: 2.15rem;
+  line-height: 1;
+  margin: 2px 0 8px;
+}
+
+.tile-label {
+  display: block;
+  font-size: 0.95rem;
+  font-weight: 700;
+  line-height: 1.16;
 }
 
 .bingo-card td.marked {
-  background: #cfe5dd;
-  border-color: #6f9f8e;
+  outline: 4px solid rgba(79, 133, 112, 0.45);
+  filter: saturate(0.9) brightness(0.98);
 }
 
 .bingo-card td.marked::after {
   content: "✓";
   position: absolute;
-  top: 5px;
-  right: 8px;
-  font-size: 1.2rem;
+  top: 6px;
+  right: 9px;
+  font-size: 1.3rem;
+  font-weight: 900;
 }
 
 .bingo-card td.free {
-  background: #e9def0;
-  border-color: #b49ac4;
+  background: #fff9ec;
+  border: 2px dashed #e0be76;
   cursor: default;
 }
 
 .free-heart {
   display: block;
-  font-size: 1.8rem;
-  margin-bottom: 4px;
+  font-size: 2rem;
+  margin-bottom: 5px;
+}
+
+.free-label {
+  display: block;
+  font-weight: 900;
+  font-size: 1.18rem;
+  line-height: 1.08;
 }
 
 .wellness-box {
   max-width: 850px;
   margin: 25px auto 0;
-  border-radius: 18px;
-  border: 1px solid #d8dfdc;
+  border-radius: 20px;
+  border: 1px solid #ddd8ce;
   background: white;
   overflow: hidden;
+  box-shadow: 0 8px 20px rgba(65, 55, 40, 0.06);
 }
 
 .wellness-heading {
@@ -202,11 +275,11 @@ button {
 .wellness-item {
   padding: 14px;
   text-align: center;
-  border-top: 1px solid #e4e9e7;
+  border-top: 1px solid #e8e4db;
 }
 
 .wellness-item + .wellness-item {
-  border-left: 1px solid #e4e9e7;
+  border-left: 1px solid #e8e4db;
 }
 
 .wellness-item strong {
@@ -226,7 +299,7 @@ button {
   }
 
   .bingo-card {
-    border-spacing: 3px;
+    border-spacing: 4px;
   }
 
   .bingo-card th {
@@ -234,9 +307,18 @@ button {
   }
 
   .bingo-card td {
-    height: 105px;
+    height: 110px;
     padding: 5px;
-    font-size: 0.7rem;
+    border-radius: 13px;
+  }
+
+  .tile-icon {
+    font-size: 1.6rem;
+    margin-bottom: 6px;
+  }
+
+  .tile-label {
+    font-size: 0.73rem;
   }
 
   select,
@@ -272,15 +354,18 @@ button {
 </head>
 
 <body>
+
 <div class="page">
 
   <h1>Active Aging Bingo</h1>
   <p class="subtitle">A quick wellness break while we learn together.</p>
 
   <div class="instructions">
+
     <h2>How to Play</h2>
 
     <div class="steps">
+
       <div class="step">
         <div class="step-number">1</div>
         <strong>Choose Your Card</strong>
@@ -295,8 +380,8 @@ button {
 
       <div class="step">
         <div class="step-number">3</div>
-        <strong>Do or Think</strong>
-        Complete the activity, then tap the matching square.
+        <strong>Complete the Activity</strong>
+        Do the activity or think of your answer, then tap the matching square.
       </div>
 
       <div class="step">
@@ -304,11 +389,13 @@ button {
         <strong>Get 3 Lines</strong>
         Complete any 3 full lines across, down, or diagonally.
       </div>
+
     </div>
 
     <div class="winning-rule">
       Got 3 full lines? Yell BINGO! Please interrupt us — we want to hear it!
     </div>
+
   </div>
 
   <div class="controls">
@@ -321,6 +408,7 @@ button {
   <div class="card-number" id="cardNumber"></div>
 
   <table class="bingo-card" aria-label="Active Aging Bingo card">
+
     <thead>
       <tr>
         <th>B</th>
@@ -330,16 +418,20 @@ button {
         <th>O</th>
       </tr>
     </thead>
+
     <tbody id="bingoBody"></tbody>
+
   </table>
 
   <div class="wellness-box">
+
     <div class="wellness-heading">
       <h3>Wellness Is Personal</h3>
       <p>There is more than one way to participate.</p>
     </div>
 
     <div class="wellness-grid">
+
       <div class="wellness-item">
         <strong>Move Your Way</strong>
         <span>Keep movements comfortable and complete them from your chair.</span>
@@ -354,37 +446,45 @@ button {
         <strong>Make It Work for You</strong>
         <span>Modify or skip anything that does not feel right for your body.</span>
       </div>
+
     </div>
+
   </div>
+
 </div>
 
 <script>
-const activities = [
-  "DO: 5 shoulder rolls",
-  "DO: Take 3 slow deep breaths",
-  "DO: 5 ankle circles",
-  "DO: 5 seated heel raises",
-  "DO: 5 seated knee lifts",
-  "DO: Stretch both arms overhead",
-  "DO: Squeeze and relax your hands 5 times",
-  "DO: Sit tall and roll your shoulders back",
-  "DO: Roll your shoulders 5 times",
-  "DO: Reach both arms forward and back",
-  "DO: Tap your toes 5 times",
-  "DO: Relax your shoulders for 5 seconds",
 
-  "THINK: Of 3 fruits",
-  "THINK: Of something that made you smile today",
-  "THINK: Of one thing you are looking forward to",
-  "THINK: Of something you are grateful for",
-  "THINK: Of a place where you feel peaceful",
-  "THINK: Of a favourite food",
-  "THINK: Of something you enjoy doing",
-  "THINK: Of a favourite book, show, or movie",
-  "THINK: Of an activity you enjoy doing with others",
-  "THINK: Of something you enjoy about being outdoors",
-  "DO: March in your chair for 20 seconds",
-  "THINK: Of one activity that helps you relax"
+const activities = [
+
+  { label: "5 Shoulder Rolls", icon: "↻", color: "peach" },
+  { label: "3 Deep Breaths", icon: "🌬️", color: "aqua" },
+  { label: "5 Ankle Circles", icon: "🦶", color: "lav" },
+  { label: "Lift Heels", icon: "⬆️", color: "butter" },
+  { label: "Lift Knees", icon: "🦵", color: "mint" },
+
+  { label: "Reach Up", icon: "🙌", color: "sky" },
+  { label: "Squeeze Hands", icon: "✊", color: "peach" },
+  { label: "Sit Tall", icon: "🪑", color: "mint" },
+  { label: "Reach Forward", icon: "🤲", color: "lav" },
+  { label: "Tap Toes", icon: "👣", color: "rose" },
+
+  { label: "Shake Hands", icon: "👋", color: "butter" },
+  { label: "March in Chair", icon: "🪑", color: "sky" },
+  { label: "Three Big Smiles", icon: "😊", color: "mint" },
+
+  { label: "Name 3 Fruits", icon: "🍎", color: "lav" },
+  { label: "Flower You Love", icon: "🌸", color: "rose" },
+  { label: "Best Meal", icon: "🍽️", color: "butter" },
+  { label: "Best Friend", icon: "💛", color: "sky" },
+  { label: "Best Binge Show", icon: "📺", color: "peach" },
+  { label: "Favourite Colour", icon: "🌈", color: "mint" },
+  { label: "Nature Sound You Love", icon: "🍃", color: "sky" },
+  { label: "Grateful For", icon: "❤️", color: "lav" },
+  { label: "Excited About", icon: "⭐", color: "rose" },
+  { label: "Calm Place", icon: "🌿", color: "mint" },
+  { label: "Helps You Relax", icon: "🧘", color: "butter" }
+
 ];
 
 const numberOfCards = 22;
@@ -394,144 +494,296 @@ const bingoBody = document.getElementById("bingoBody");
 const cardNumber = document.getElementById("cardNumber");
 
 function seededRandom(seed) {
+
   let value = seed;
 
-  return function () {
+  return function() {
+
     value = Math.sin(value) * 10000;
+
     return value - Math.floor(value);
+
   };
+
 }
 
 function shuffleWithSeed(array, seed) {
+
   const result = [...array];
+
   const random = seededRandom(seed);
 
   for (let i = result.length - 1; i > 0; i--) {
+
     const j = Math.floor(random() * (i + 1));
+
     [result[i], result[j]] = [result[j], result[i]];
+
   }
 
   return result;
+
 }
 
 function generateCard(cardId) {
-  return shuffleWithSeed(activities, cardId * 92821 + 417);
+
+  return shuffleWithSeed(
+    activities,
+    cardId * 92821 + 417
+  );
+
 }
 
 function storageKey(cardId) {
+
   return "active-aging-bingo-card-" + cardId;
+
 }
 
 function loadMarkedSquares(cardId) {
-  const saved = localStorage.getItem(storageKey(cardId));
 
-  if (!saved) return [];
+  const saved = localStorage.getItem(
+    storageKey(cardId)
+  );
 
-  try {
-    return JSON.parse(saved);
-  } catch {
+  if (!saved) {
     return [];
   }
+
+  try {
+
+    return JSON.parse(saved);
+
+  } catch {
+
+    return [];
+
+  }
+
 }
 
 function saveMarkedSquares(cardId, marked) {
-  localStorage.setItem(storageKey(cardId), JSON.stringify(marked));
+
+  localStorage.setItem(
+    storageKey(cardId),
+    JSON.stringify(marked)
+  );
+
 }
 
 function renderCard(cardId) {
-  const activitiesForCard = generateCard(cardId);
-  const markedSquares = loadMarkedSquares(cardId);
+
+  const activitiesForCard =
+    generateCard(cardId);
+
+  const markedSquares =
+    loadMarkedSquares(cardId);
 
   bingoBody.innerHTML = "";
-  cardNumber.textContent = "Card #" + cardId;
+
+  cardNumber.textContent =
+    "Card #" + cardId;
 
   let activityIndex = 0;
 
   for (let row = 0; row < 5; row++) {
-    const tr = document.createElement("tr");
+
+    const tr =
+      document.createElement("tr");
 
     for (let column = 0; column < 5; column++) {
-      const td = document.createElement("td");
-      const squareIndex = row * 5 + column;
+
+      const td =
+        document.createElement("td");
+
+      const squareIndex =
+        row * 5 + column;
 
       if (squareIndex === 12) {
-        td.classList.add("free", "marked");
-        td.innerHTML = '<span class="free-heart">♥</span>WELLNESS BREAK';
+
+        td.classList.add(
+          "free",
+          "marked"
+        );
+
+        td.innerHTML = `
+          <span class="free-heart">♥</span>
+          <span class="free-label">
+            WELLNESS<br>BREAK
+          </span>
+        `;
+
       } else {
-        td.textContent = activitiesForCard[activityIndex];
-        td.dataset.squareIndex = squareIndex;
+
+        const item =
+          activitiesForCard[activityIndex];
+
+        td.classList.add(
+          "tile-" + item.color
+        );
+
+        td.dataset.squareIndex =
+          squareIndex;
+
+        td.innerHTML = `
+          <span class="tile-icon">
+            ${item.icon}
+          </span>
+
+          <span class="tile-label">
+            ${item.label}
+          </span>
+        `;
+
         activityIndex++;
 
-        if (markedSquares.includes(squareIndex)) {
+        if (
+          markedSquares.includes(squareIndex)
+        ) {
+
           td.classList.add("marked");
+
         }
 
-        td.addEventListener("click", function () {
-          td.classList.toggle("marked");
+        td.addEventListener(
+          "click",
+          function() {
 
-          const currentlyMarked = [];
+            td.classList.toggle("marked");
 
-          bingoBody
-            .querySelectorAll("td.marked:not(.free)")
-            .forEach(cell => {
-              currentlyMarked.push(Number(cell.dataset.squareIndex));
-            });
+            const currentlyMarked = [];
 
-          saveMarkedSquares(cardId, currentlyMarked);
-        });
+            bingoBody
+              .querySelectorAll(
+                "td.marked:not(.free)"
+              )
+              .forEach(cell => {
+
+                currentlyMarked.push(
+                  Number(
+                    cell.dataset.squareIndex
+                  )
+                );
+
+              });
+
+            saveMarkedSquares(
+              cardId,
+              currentlyMarked
+            );
+
+          }
+        );
+
       }
 
       tr.appendChild(td);
+
     }
 
     bingoBody.appendChild(tr);
+
   }
+
 }
 
 function populateCardSelector() {
-  for (let i = 1; i <= numberOfCards; i++) {
-    const option = document.createElement("option");
+
+  for (
+    let i = 1;
+    i <= numberOfCards;
+    i++
+  ) {
+
+    const option =
+      document.createElement("option");
+
     option.value = i;
-    option.textContent = "Card " + i;
+
+    option.textContent =
+      "Card " + i;
+
     cardSelect.appendChild(option);
+
   }
+
 }
 
-cardSelect.addEventListener("change", function () {
-  renderCard(Number(cardSelect.value));
-});
+cardSelect.addEventListener(
+  "change",
+  function() {
+
+    renderCard(
+      Number(cardSelect.value)
+    );
+
+  }
+);
 
 document
   .getElementById("resetButton")
-  .addEventListener("click", function () {
-    const cardId = Number(cardSelect.value);
-    localStorage.removeItem(storageKey(cardId));
-    renderCard(cardId);
-  });
+  .addEventListener(
+    "click",
+    function() {
+
+      const cardId =
+        Number(cardSelect.value);
+
+      localStorage.removeItem(
+        storageKey(cardId)
+      );
+
+      renderCard(cardId);
+
+    }
+  );
 
 document
   .getElementById("randomButton")
-  .addEventListener("click", function () {
-    const current = Number(cardSelect.value);
-    let newCard = current;
+  .addEventListener(
+    "click",
+    function() {
 
-    while (newCard === current) {
-      newCard = Math.floor(Math.random() * numberOfCards) + 1;
+      const current =
+        Number(cardSelect.value);
+
+      let newCard = current;
+
+      while (newCard === current) {
+
+        newCard =
+          Math.floor(
+            Math.random() *
+            numberOfCards
+          ) + 1;
+
+      }
+
+      cardSelect.value =
+        newCard;
+
+      renderCard(newCard);
+
     }
-
-    cardSelect.value = newCard;
-    renderCard(newCard);
-  });
+  );
 
 document
   .getElementById("printButton")
-  .addEventListener("click", function () {
-    window.print();
-  });
+  .addEventListener(
+    "click",
+    function() {
+
+      window.print();
+
+    }
+  );
 
 populateCardSelector();
+
 cardSelect.value = 1;
+
 renderCard(1);
+
 </script>
 
 </body>
